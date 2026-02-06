@@ -18,17 +18,18 @@ class UserList extends Component {
   componentDidMount() {
     this.getUserData();
   }
-
+  
+  // Fetch all users from the API
   getUserData = async () => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/users`);
+    const response = await fetch("https://6985c42d6964f10bf25465bc.mockapi.io/users");
     const data = await response.json();
     this.setState({ usersDataList: data });
   };  
   
 
-
+  // Delete a user from the API
   onClickDelete = async(id) => { 
-    await fetch(`${process.env.REACT_APP_API_URL}/users/${id}`, {
+    await fetch(`https://6985c42d6964f10bf25465bc.mockapi.io/users/${id}`, {
     method: "DELETE",
     });
     const { usersDataList } = this.state; 

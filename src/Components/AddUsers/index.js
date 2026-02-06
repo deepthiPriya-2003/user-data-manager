@@ -1,5 +1,4 @@
 import { Component } from "react";
-import { v4 as uuid } from "uuid";
 import { Navigate } from "react-router-dom";
 import "./index.css";
 
@@ -12,14 +11,14 @@ class AddUser extends Component {
     error: false,
     isSubmitted: false,
   };
-
+  
+  // Create a new user in the API
   creatingNewUser = async () => {
     const { firstName, lastName, email, phone,} = this.state;
 
-    await fetch(`${process.env.REACT_APP_API_URL}/users`, {
+    await fetch("https://6985c42d6964f10bf25465bc.mockapi.io/users", {
       method: "POST",
       body: JSON.stringify({
-        id: uuid(),
         firstName,
         lastName,
         email,

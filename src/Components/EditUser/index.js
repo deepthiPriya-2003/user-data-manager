@@ -18,13 +18,14 @@ class EditUser extends Component {
     };
   }
 
+  // Update existing user details in the API
   onSubmitForm = async (e) => {
     e.preventDefault();
 
     const { id, firstName, lastName, email, phone } = this.state;
 
-    await fetch(`${process.env.REACT_APP_API_URL}/users/${id}`, {
-      method: "PATCH",
+    await fetch(`https://6985c42d6964f10bf25465bc.mockapi.io/users/${id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
