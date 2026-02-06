@@ -1,0 +1,100 @@
+import { Component } from "react";
+import { Navigate } from "react-router-dom";
+import "./index.css";
+
+class EditUser extends Component {
+  constructor(props) {
+    super(props);
+
+    const user = window.history.state?.usr?.user;
+
+    this.state = {
+      id: user?.id || "",
+      firstName: user?.firstName || "",
+      lastName: user?.lastName || "",
+      email: user?.email || "",
+      phone: user?.phone || "",
+      isUpdated: false,
+    };
+  }
+
+  onSubmitForm = async (e) => {
+    e.preventDefault();
+
+    const { id, firstName, lastName, email, phone } = this.state;
+
+    await fetch(`${process.env.REACT_APP_API_URL}/users/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ firstName, lastName, email, phone }),
+    });
+
+    this.setState({ isUpdated: true });
+  };
+
+  render() {
+    if (this.state.isUpdated) {
+      return <Navigate to="/" />;
+    }
+
+    return (
+      <div className="form-bg-container">
+        <h1 className="form-title">Edit User</h1>
+
+        <form className="form-container" onSubmit={this.onSubmitForm}>
+          <div className="input-container">
+            <label>First Name</label>
+            <input
+              type="text"
+              value={this.state.firstName}
+              onChange={(e) =>
+                this.setState({ firstName: e.target.value })
+              }
+            />
+          </div>
+
+          <div className="input-container">
+            <label>Last Name</label>
+            <input
+              type="text"
+              value={this.state.lastName}
+              onChange={(e) =>
+                this.setState({ lastName: e.target.value })
+              }
+            />
+          </div>
+
+          <div className="input-container">
+            <label>Email</label>
+            <input
+              type="email"
+              value={this.state.email}
+              onChange={(e) =>
+                this.setState({ email: e.target.value })
+              }
+            />
+          </div>
+
+          <div className="input-container">
+            <label>Phone</label>
+            <input
+              type="text"
+              value={this.state.phone}
+              onChange={(e) =>
+                this.setState({ phone: e.target.value })
+              }
+            />
+          </div>
+
+          <button type="submit" className="submit-btn">
+            Update User
+          </button>
+        </form>
+      </div>
+    );
+  }
+}
+
+export default EditUser;
