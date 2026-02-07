@@ -71,7 +71,8 @@ class AddUser extends Component {
                     </label>
                     <input
                       type="text"
-                      className="form-control"
+                      pattern="[A-Za-z]+"
+                      className="form-control" 
                       onChange={(e) =>
                         this.setState({ firstName: e.target.value })
                       }
@@ -83,7 +84,8 @@ class AddUser extends Component {
                       Last Name
                     </label>
                     <input
-                      type="text"
+                      type="text" 
+                      pattern="[A-Za-z]+"
                       className="form-control"
                       onChange={(e) =>
                         this.setState({ lastName: e.target.value })
@@ -97,6 +99,8 @@ class AddUser extends Component {
                     </label>
                     <input
                       type="email"
+                      pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                      required
                       className="form-control"
                       onChange={(e) =>
                         this.setState({ email: e.target.value })
@@ -109,7 +113,9 @@ class AddUser extends Component {
                       Phone
                     </label>
                     <input
-                      type="text"
+                      type="tel"
+                      pattern="^[1-9]\d{9}$"
+                      required
                       className="form-control"
                       onChange={(e) =>
                         this.setState({ phone: e.target.value })
